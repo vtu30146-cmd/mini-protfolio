@@ -1,0 +1,25 @@
+# Hill Climbing - Treasure Hunt
+
+treasure = 8
+current = 2
+
+print("Treasure Position:", treasure)
+print("Starting Position:", current)
+
+while current != treasure:
+
+    left = current - 1
+    right = current + 1
+
+    current_distance = abs(treasure - current)
+    left_distance = abs(treasure - left)
+    right_distance = abs(treasure - right)
+
+    if left_distance < current_distance:
+        current = left
+    elif right_distance < current_distance:
+        current = right
+
+    print("Moved to:", current)
+
+print("Treasure Found!")
