@@ -1,0 +1,39 @@
+from collections import deque
+
+graph = {
+    "Master": ["E1", "E2"],
+    "E1": ["E3", "E4"],
+    "E2": ["E5"],
+    "E3": [],
+    "E4": [],
+    "E5": []
+}
+
+offline = {"E4"}
+
+visited = set()
+queue = deque([("Master", 0)])
+failed = []
+max_time = 0
+
+while queue:
+    node, time = queue.popleft()
+
+    if node in visited:
+        continue
+
+    visited.add(node)
+
+    if node in offline:
+        failed.append(node)
+        continue
+
+    print(node, "received signal at", time, "sec")
+    max_time = max(max_time, time)
+
+    for neighbour in graph[node]:
+        if neighbour not in visited:
+            queue.append((neighbour, time + 1))
+
+print("\nMinimum Time:", max_time, "seconds")
+print("Offline Servers:", failed)
